@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/warzonedrop/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/warzonedrop/static/js/main.2ed57920.chunk.js",
+    "main.js.map": "/warzonedrop/static/js/main.2ed57920.chunk.js.map",
+    "runtime-main.js": "/warzonedrop/static/js/runtime-main.1d56c790.js",
+    "runtime-main.js.map": "/warzonedrop/static/js/runtime-main.1d56c790.js.map",
+    "static/js/2.e888c6a9.chunk.js": "/warzonedrop/static/js/2.e888c6a9.chunk.js",
+    "static/js/2.e888c6a9.chunk.js.map": "/warzonedrop/static/js/2.e888c6a9.chunk.js.map",
+    "static/js/3.4d631d64.chunk.js": "/warzonedrop/static/js/3.4d631d64.chunk.js",
+    "static/js/3.4d631d64.chunk.js.map": "/warzonedrop/static/js/3.4d631d64.chunk.js.map",
+    "index.html": "/warzonedrop/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/warzonedrop/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.e888c6a9.chunk.js.LICENSE.txt": "/warzonedrop/static/js/2.e888c6a9.chunk.js.LICENSE.txt",
+    "static/media/map.92d5979a.png": "/warzonedrop/static/media/map.92d5979a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1d56c790.js",
+    "static/js/2.e888c6a9.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.2ed57920.chunk.js"
+  ]
+}
