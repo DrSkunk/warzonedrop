@@ -17,8 +17,8 @@ const Map = styled.div`
     map === locationEnum.verdansk ? verdanskMapImage : rebirthMapImage});
   background-size: cover;
   @media (orientation: landscape) {
-    height: 90vh;
-    width: 90vh;
+    height: 83vh;
+    width: 83vh;
   }
 
   @media (orientation: portrait) {
@@ -56,8 +56,9 @@ const Highlight = styled.div`
   filter: alpha(opacity=20);
   cursor: pointer;
   &:hover {
-    background-color: ${({ active }) => (active ? "gray" : "orange")};
+    border: 10px solid orange;
   }
+  box-sizing: border-box;
 `;
 
 const Chosen = styled.div`
@@ -132,129 +133,147 @@ const locationEnum = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentLocation: locationEnum.rebirth,
-      locations: {
-        verdansk: [
-          { id: 0, x: 1, y: 3, active: false },
-          { id: 1, x: 1, y: 4, active: false },
-          { id: 2, x: 1, y: 5, active: false },
-          { id: 3, x: 1, y: 6, active: true },
-          { id: 4, x: 1, y: 7, active: false },
-          { id: 5, x: 2, y: 1, active: true },
-          { id: 6, x: 2, y: 2, active: true },
-          { id: 7, x: 2, y: 3, active: true },
-          { id: 8, x: 2, y: 4, active: true },
-          { id: 9, x: 2, y: 5, active: true },
-          { id: 10, x: 2, y: 6, active: true },
-          { id: 11, x: 2, y: 7, active: true },
-          { id: 12, x: 2, y: 8, active: true },
-          { id: 13, x: 3, y: 1, active: true },
-          { id: 14, x: 3, y: 2, active: true },
-          { id: 15, x: 3, y: 3, active: true },
-          { id: 16, x: 3, y: 4, active: true },
-          { id: 17, x: 3, y: 5, active: true },
-          { id: 18, x: 3, y: 6, active: true },
-          { id: 19, x: 3, y: 7, active: true },
-          { id: 20, x: 3, y: 8, active: true },
-          { id: 21, x: 4, y: 1, active: true },
-          { id: 22, x: 4, y: 2, active: true },
-          { id: 23, x: 4, y: 3, active: true },
-          { id: 24, x: 4, y: 4, active: true },
-          { id: 25, x: 4, y: 5, active: true },
-          { id: 26, x: 4, y: 6, active: true },
-          { id: 27, x: 4, y: 7, active: true },
-          { id: 28, x: 4, y: 8, active: true },
-          { id: 29, x: 5, y: 1, active: false },
-          { id: 30, x: 5, y: 2, active: true },
-          { id: 31, x: 5, y: 3, active: true },
-          { id: 32, x: 5, y: 4, active: true },
-          { id: 33, x: 5, y: 5, active: true },
-          { id: 34, x: 5, y: 6, active: true },
-          { id: 35, x: 5, y: 7, active: true },
-          { id: 36, x: 5, y: 8, active: true },
-          { id: 37, x: 6, y: 2, active: true },
-          { id: 38, x: 6, y: 3, active: true },
-          { id: 39, x: 6, y: 4, active: true },
-          { id: 40, x: 6, y: 5, active: true },
-          { id: 41, x: 6, y: 6, active: true },
-          { id: 42, x: 6, y: 7, active: true },
-          { id: 43, x: 6, y: 8, active: true },
-          { id: 44, x: 7, y: 2, active: false },
-          { id: 45, x: 7, y: 3, active: true },
-          { id: 46, x: 7, y: 4, active: true },
-          { id: 47, x: 7, y: 5, active: true },
-          { id: 48, x: 7, y: 6, active: true },
-          { id: 49, x: 7, y: 7, active: true },
-          { id: 50, x: 7, y: 8, active: true },
-          { id: 51, x: 8, y: 4, active: false },
-          { id: 52, x: 8, y: 5, active: true },
-          { id: 53, x: 8, y: 6, active: true },
-          { id: 54, x: 8, y: 7, active: true },
-          { id: 55, x: 8, y: 8, active: true },
-        ],
-        rebirth: [
-          { id: 0, x: 2, y: 6, active: false },
-          { id: 1, x: 3, y: 5, active: true },
-          { id: 2, x: 3, y: 6, active: true },
-          { id: 3, x: 3, y: 7, active: false },
-          { id: 4, x: 4, y: 3, active: true },
-          { id: 5, x: 4, y: 4, active: true },
-          { id: 6, x: 4, y: 5, active: true },
-          { id: 7, x: 4, y: 6, active: true },
-          { id: 8, x: 4, y: 7, active: false },
-          { id: 9, x: 5, y: 3, active: true },
-          { id: 10, x: 5, y: 4, active: true },
-          { id: 11, x: 5, y: 5, active: true },
-          { id: 12, x: 5, y: 6, active: true },
-          { id: 13, x: 6, y: 2, active: true },
-          { id: 14, x: 6, y: 3, active: true },
-          { id: 15, x: 6, y: 4, active: true },
-          { id: 16, x: 6, y: 5, active: true },
-          { id: 17, x: 6, y: 6, active: false },
-          { id: 18, x: 7, y: 2, active: true },
-          { id: 19, x: 7, y: 3, active: true },
-          { id: 20, x: 7, y: 4, active: true },
-        ],
-      },
-      chosenId: null,
-      amountOfValidLocations: {
-        [locationEnum.verdansk]: 0,
-        [locationEnum.rebirth]: 0,
-      },
-    };
-    Object.values(locationEnum).forEach((location) => {
-      this.state.amountOfValidLocations[location] = countValidLocations(
-        this.state.locations[location]
-      );
-    });
-  }
-
-  onHighlightClick = (i) => {
-    this.setState(({ locations, currentLocation, amountOfValidLocations }) => {
-      const newLocations = [
-        ...locations[currentLocation].slice(0, i),
-        {
-          ...locations[currentLocation][i],
-          active: !locations[currentLocation][i].active,
-        },
-        ...locations[currentLocation].slice(
-          i + 1,
-          locations[currentLocation].length
-        ),
-      ];
-
-      return {
+    this.state = JSON.parse(localStorage.getItem("appState"));
+    if (!this.state) {
+      this.state = {
+        currentLocation: locationEnum.verdansk,
         locations: {
-          ...locations,
-          [currentLocation]: newLocations,
+          verdansk: [
+            { id: 0, x: 1, y: 3, active: false },
+            { id: 1, x: 1, y: 4, active: false },
+            { id: 2, x: 1, y: 5, active: false },
+            { id: 3, x: 1, y: 6, active: true },
+            { id: 4, x: 1, y: 7, active: false },
+            { id: 5, x: 2, y: 1, active: true },
+            { id: 6, x: 2, y: 2, active: true },
+            { id: 7, x: 2, y: 3, active: true },
+            { id: 8, x: 2, y: 4, active: true },
+            { id: 9, x: 2, y: 5, active: true },
+            { id: 10, x: 2, y: 6, active: true },
+            { id: 11, x: 2, y: 7, active: true },
+            { id: 12, x: 2, y: 8, active: true },
+            { id: 13, x: 3, y: 1, active: true },
+            { id: 14, x: 3, y: 2, active: true },
+            { id: 15, x: 3, y: 3, active: true },
+            { id: 16, x: 3, y: 4, active: true },
+            { id: 17, x: 3, y: 5, active: true },
+            { id: 18, x: 3, y: 6, active: true },
+            { id: 19, x: 3, y: 7, active: true },
+            { id: 20, x: 3, y: 8, active: true },
+            { id: 21, x: 4, y: 1, active: true },
+            { id: 22, x: 4, y: 2, active: true },
+            { id: 23, x: 4, y: 3, active: true },
+            { id: 24, x: 4, y: 4, active: true },
+            { id: 25, x: 4, y: 5, active: true },
+            { id: 26, x: 4, y: 6, active: true },
+            { id: 27, x: 4, y: 7, active: true },
+            { id: 28, x: 4, y: 8, active: true },
+            { id: 29, x: 5, y: 1, active: false },
+            { id: 30, x: 5, y: 2, active: true },
+            { id: 31, x: 5, y: 3, active: true },
+            { id: 32, x: 5, y: 4, active: true },
+            { id: 33, x: 5, y: 5, active: true },
+            { id: 34, x: 5, y: 6, active: true },
+            { id: 35, x: 5, y: 7, active: true },
+            { id: 36, x: 5, y: 8, active: true },
+            { id: 37, x: 6, y: 2, active: true },
+            { id: 38, x: 6, y: 3, active: true },
+            { id: 39, x: 6, y: 4, active: true },
+            { id: 40, x: 6, y: 5, active: true },
+            { id: 41, x: 6, y: 6, active: true },
+            { id: 42, x: 6, y: 7, active: true },
+            { id: 43, x: 6, y: 8, active: true },
+            { id: 44, x: 7, y: 2, active: false },
+            { id: 45, x: 7, y: 3, active: true },
+            { id: 46, x: 7, y: 4, active: true },
+            { id: 47, x: 7, y: 5, active: true },
+            { id: 48, x: 7, y: 6, active: true },
+            { id: 49, x: 7, y: 7, active: true },
+            { id: 50, x: 7, y: 8, active: true },
+            { id: 51, x: 8, y: 4, active: false },
+            { id: 52, x: 8, y: 5, active: true },
+            { id: 53, x: 8, y: 6, active: true },
+            { id: 54, x: 8, y: 7, active: true },
+            { id: 55, x: 8, y: 8, active: true },
+          ],
+          rebirth: [
+            { id: 0, x: 2, y: 6, active: false },
+            { id: 1, x: 3, y: 5, active: true },
+            { id: 2, x: 3, y: 6, active: true },
+            { id: 3, x: 3, y: 7, active: false },
+            { id: 4, x: 4, y: 3, active: true },
+            { id: 5, x: 4, y: 4, active: true },
+            { id: 6, x: 4, y: 5, active: true },
+            { id: 7, x: 4, y: 6, active: true },
+            { id: 8, x: 4, y: 7, active: false },
+            { id: 9, x: 5, y: 3, active: true },
+            { id: 10, x: 5, y: 4, active: true },
+            { id: 11, x: 5, y: 5, active: true },
+            { id: 12, x: 5, y: 6, active: true },
+            { id: 13, x: 6, y: 2, active: true },
+            { id: 14, x: 6, y: 3, active: true },
+            { id: 15, x: 6, y: 4, active: true },
+            { id: 16, x: 6, y: 5, active: true },
+            { id: 17, x: 6, y: 6, active: false },
+            { id: 18, x: 7, y: 2, active: true },
+            { id: 19, x: 7, y: 3, active: true },
+            { id: 20, x: 7, y: 4, active: true },
+          ],
         },
+        chosenId: null,
         amountOfValidLocations: {
-          ...amountOfValidLocations,
-          [currentLocation]: countValidLocations(newLocations),
+          [locationEnum.verdansk]: 0,
+          [locationEnum.rebirth]: 0,
         },
       };
-    });
+      Object.values(locationEnum).forEach((location) => {
+        this.state.amountOfValidLocations[location] = countValidLocations(
+          this.state.locations[location]
+        );
+      });
+    }
+  }
+
+  setPersistentState = (newStateOrFunction) => {
+    let newState = newStateOrFunction;
+    if (typeof newStateOrFunction === "function") {
+      newState = newStateOrFunction(this.state);
+    }
+    console.log(newState);
+    localStorage.setItem(
+      "appState",
+      JSON.stringify({ ...this.state, ...newState })
+    );
+    this.setState(newState);
+  };
+
+  onHighlightClick = (i) => {
+    this.setPersistentState(
+      ({ locations, currentLocation, amountOfValidLocations }) => {
+        const newLocations = [
+          ...locations[currentLocation].slice(0, i),
+          {
+            ...locations[currentLocation][i],
+            active: !locations[currentLocation][i].active,
+          },
+          ...locations[currentLocation].slice(
+            i + 1,
+            locations[currentLocation].length
+          ),
+        ];
+
+        return {
+          locations: {
+            ...locations,
+            [currentLocation]: newLocations,
+          },
+          amountOfValidLocations: {
+            ...amountOfValidLocations,
+            [currentLocation]: countValidLocations(newLocations),
+          },
+        };
+      }
+    );
   };
 
   findLocation = () => {
@@ -262,7 +281,7 @@ class App extends React.Component {
       ({ active }) => active
     );
     const chosenId = locations[Math.floor(Math.random() * locations.length)].id;
-    this.setState({
+    this.setPersistentState({
       chosenId,
     });
   };
@@ -285,7 +304,7 @@ class App extends React.Component {
         <Buttons>
           <Button
             onClick={() =>
-              this.setState({
+              this.setPersistentState({
                 currentLocation: locationEnum.verdansk,
                 chosenId: null,
               })
@@ -296,7 +315,7 @@ class App extends React.Component {
           </Button>
           <Button
             onClick={() =>
-              this.setState({
+              this.setPersistentState({
                 currentLocation: locationEnum.rebirth,
                 chosenId: null,
               })
