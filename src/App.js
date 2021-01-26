@@ -1,29 +1,54 @@
 import React from "react";
 import styled from "styled-components";
-import mapImage from "./imgs/map.png";
+import mapImage from "./imgs/map.jpg";
 
 const Root = styled.div`
-  background-color: black;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Map = styled.div`
   position: relative;
-  width: 1096px;
-  height: 1096px;
   background-image: url(${mapImage});
   background-size: cover;
+  @media (orientation: landscape) {
+    height: 90vh;
+    width: 90vh;
+  }
+
+  @media (orientation: portrait) {
+    height: 100vw;
+    width: 100vw;
+  }
 `;
 
+const InnerMap = styled.div`
+  margin: 2.8284%;
+  width: calc(100% - 5.65693%);
+  height: calc(100% - 5.65693%);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+`;
+// 1096 whole map
+// 1 border = 31px
+// 1 border in % = 2.82846715328467 %
+// 2 borders = 62px
+// 2 borders % = 62 / 1096 = 5.65693%
+// 10 squares = 1096-62 = 1034
+// 1 square = 1034 / 10 = 103.4px
+// 103.4 / 1096 = 9.43430656934307
+
 const Highlight = styled.div`
-  position: absolute;
-  left: ${({ x }) => 31 + Math.round(x * 103.5)}px;
-  top: ${({ y }) => 31 + Math.round(y * 103.6)}px;
-  width: 104px;
-  height: 104px;
+  width: 100%;
+  height: 100%;
+  grid-column-start: ${({ x }) => x + 1};
+  grid-column-end: ${({ x }) => x + 2};
+  grid-row-start: ${({ y }) => y + 1};
+  grid-row-end: ${({ y }) => y + 2};
   background-color: ${({ active }) => (active ? "green" : "red")};
   opacity: 0.2;
   filter: alpha(opacity=20);
@@ -34,38 +59,57 @@ const Highlight = styled.div`
 `;
 
 const Chosen = styled.div`
-  position: absolute;
-  left: ${({ x }) => 31 + Math.round(x * 103.5)}px;
-  top: ${({ y }) => 31 + Math.round(y * 103.6)}px;
-  width: 104px;
-  height: 104px;
+  width: 100%;
+  height: 100%;
+  grid-column-start: ${({ x }) => x + 1};
+  grid-column-end: ${({ x }) => x + 2};
+  grid-row-start: ${({ y }) => y + 1};
+  grid-row-end: ${({ y }) => y + 2};
   background-color: blue;
   opacity: 0.2;
   filter: alpha(opacity=20);
   cursor: pointer;
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Button = styled.button`
-  width: 545px;
-  background-color: #4caf50;
-  border: none;
+  background-color: green;
   color: white;
-  padding: 15px 32px;
+  border: none;
+  margin: 0.5em;
+  padding: 1em 2em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 1em;
   cursor: pointer;
+
   &:hover {
     background-color: gray;
   }
+
   &:disabled {
-    border: 1px solid #999999;
-    background-color: #cccccc;
-    color: #666666;
+    background-color: #ccc;
+    color: #666;
     cursor: not-allowed;
   }
+
+  @media (orientation: landscape) {
+    width: 45vh;
+  }
+
+  @media (orientation: portrait) {
+    width: 45vw;
+  }
+`;
+
+const Text = styled.div`
+  font-size: 1.6em;
 `;
 
 function countValidLocations(locations) {
@@ -75,6 +119,9 @@ function countValidLocations(locations) {
   );
 }
 
+const columnLookup = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+// TODO add persistent location preference
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -171,43 +218,56 @@ class App extends React.Component {
   };
 
   render() {
-    const highlights = this.state.locations.map(({ x, y, active }, i) => (
+    const { locations, chosenId } = this.state;
+    const highlights = locations.map(({ x, y, active, id }, i) => (
       <Highlight
         key={`highlight${x}${y}`}
         x={x}
         y={y}
         active={active}
-        onClick={() => this.onHighlightClick(i)}
+        onClick={() => this.onHighlightClick(id)}
       />
     ));
     return (
       <Root>
-        <div>
+        <Buttons>
           <Button
             onClick={this.findLocation}
             disabled={this.state.amountOfValidLocations === 0}
           >
-            Find me a location ({this.state.amountOfValidLocations} available)
+            Find me a location
           </Button>
           <Button
             onClick={() => {
               this.setState({ chosenId: null });
             }}
-            disabled={this.state.chosenId === null}
+            disabled={chosenId === null}
           >
             Mark drop locations
           </Button>
-          <Map>
+        </Buttons>
+        <Map>
+          <InnerMap>
             {this.state.chosenId ? (
               <Chosen
-                x={this.state.locations[this.state.chosenId].x}
-                y={this.state.locations[this.state.chosenId].y}
+                x={locations[this.state.chosenId].x}
+                y={locations[this.state.chosenId].y}
               />
             ) : (
               highlights
             )}
-          </Map>
-        </div>
+          </InnerMap>
+        </Map>
+        {chosenId && (
+          <Text>
+            Your location:{" "}
+            <strong>
+              {columnLookup[locations[chosenId].x]}
+              {locations[chosenId].y}
+            </strong>
+          </Text>
+        )}
+        <Text>{this.state.amountOfValidLocations} locations available</Text>
       </Root>
     );
   }
