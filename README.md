@@ -1,8 +1,10 @@
 # Warzone drop randomizer
 
-This project creates a website on which you choose potential drop locations and it chooses one for you randomly.
+Find a random drop location in Verdansk or Rebirth Island in Call of Duty's Warzone.
 
-It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+View it at https://sebastiaanjansen.be/warzonedrop/
+
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
