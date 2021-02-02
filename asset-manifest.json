@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/warzonedrop/static/css/main.0bf2c1aa.chunk.css",
-    "main.js": "/warzonedrop/static/js/main.841b2c45.chunk.js",
-    "main.js.map": "/warzonedrop/static/js/main.841b2c45.chunk.js.map",
+    "main.js": "/warzonedrop/static/js/main.51b2288e.chunk.js",
+    "main.js.map": "/warzonedrop/static/js/main.51b2288e.chunk.js.map",
     "runtime-main.js": "/warzonedrop/static/js/runtime-main.53f57c74.js",
     "runtime-main.js.map": "/warzonedrop/static/js/runtime-main.53f57c74.js.map",
     "static/js/2.f45a5961.chunk.js": "/warzonedrop/static/js/2.f45a5961.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.53f57c74.js",
     "static/js/2.f45a5961.chunk.js",
     "static/css/main.0bf2c1aa.chunk.css",
-    "static/js/main.841b2c45.chunk.js"
+    "static/js/main.51b2288e.chunk.js"
   ]
 }
