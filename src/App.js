@@ -260,7 +260,6 @@ class App extends React.Component {
     if (typeof newStateOrFunction === "function") {
       newState = newStateOrFunction(this.state);
     }
-    console.log(newState);
     localStorage.setItem(
       "appState",
       JSON.stringify({ ...this.state, ...newState })
